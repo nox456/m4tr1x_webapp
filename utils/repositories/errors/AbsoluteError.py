@@ -1,4 +1,4 @@
-from repositories.errors.Error import Error
+from utils.repositories.errors.Error import Error
 
 
 class AbsoluteError(Error):

@@ -1,9 +1,9 @@
 import numpy as np
-from helpers.arrays import splitInPairs
+from utils.helpers.arrays import splitInPairs
 from array import ArrayType
-from repositories.Number import Number
-from helpers.matrices import sumaMatrices, multiMatrices, divideMatrices, restaMatrices
-from repositories.FileManager import FileManager
+from utils.repositories.Number import Number
+from utils.helpers.matrices import sumaMatrices, multiMatrices, divideMatrices, restaMatrices
+from utils.repositories.FileManager import FileManager
 
 alpha = "DEFGHIJKLMNOPQRSTUVWXYZ"
 

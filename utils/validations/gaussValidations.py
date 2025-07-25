@@ -1,5 +1,5 @@
-from repositories.GaussMatrixOp import GaussMatrixOp
-from repositories.SeidelMatrixOp import SeidelMatrixOp
+from utils.repositories.GaussMatrixOp import GaussMatrixOp
+from utils.repositories.SeidelMatrixOp import SeidelMatrixOp
 
 
 def validateJordan(matrix, manager):

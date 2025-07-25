@@ -5,9 +5,7 @@ class archiveGenerator:
     __router = ""
     __nameArchive = ""
 
-    def __init__(
-        self, nameArchive="generalArchive.bin", router=os.getcwd()
-    ):  # constructor polimorfico
+    def __init__(self, nameArchive="generalArchive.bin", router=os.getcwd()):
         """
         Crear o modificar archivos.
 
@@ -45,22 +43,18 @@ class archiveGenerator:
         if not nameArchive or len(nameArchive) == 0:
             raise Exception("Manage-Error: La ruta es vacia.")
 
-        self.__nameArchive
+        self.__nameArchive = nameArchive
 
-    def __setOrCreateFiles(
-        self, nameArchive, content="", bool=False
-    ):  # metodo polimorfico
+    def __setOrCreateFiles(self, nameArchive, content="", bool=False):
 
         if not nameArchive or len(nameArchive) == 0:
             raise Exception("Manage-Error: El nombre esta Vacio.")
 
-        try:  # usamos try en este constexto ya que OPEN es un objeto externo a nuestra clase
+        try: 
             if not content or len(content) == 0:
                 archive = open(self.__router + "\\" + nameArchive + ".txt", "x")
                 return
-            archive = open(
-                os.path.join(self.__router,nameArchive), "a"
-            )  # requiere que el nombre venga con su extencion.
+            archive = open(os.path.join(self.__router,nameArchive), "a") 
 
             if bool == True:
                 archive.write(content + "\n")
@@ -87,15 +81,9 @@ class archiveGenerator:
             for i in range(len(arrayBi)):
                 for j in range(len(arrayBi[0])):
                     if j == (len(arrayBi[0]) - 1):
-                        self.__setOrCreateFiles(
-                            self.__nameArchive,
-                            str(arrayBi[i][j]),
-                            i < (len(arrayBi) - 1),
-                        )
+                        self.__setOrCreateFiles(self.__nameArchive, str(arrayBi[i][j]), i < (len(arrayBi) - 1),)
                     else:
-                        self.__setOrCreateFiles(
-                            self.__nameArchive, str(arrayBi[i][j]) + "/"
-                        )
+                        self.__setOrCreateFiles(self.__nameArchive, str(arrayBi[i][j]) + "/")
 
     def __utilDirectory(self, router):
 

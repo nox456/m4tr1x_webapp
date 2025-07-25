@@ -1,5 +1,5 @@
-from repositories.NumericSystem import NumericSystem
-from repositories.FileManager import FileManager
+from utils.repositories.NumericSystem import NumericSystem
+from utils.repositories.FileManager import FileManager
 from array import ArrayType
 
 

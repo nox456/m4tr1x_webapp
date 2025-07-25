@@ -1,5 +1,5 @@
-from repositories.SigFigures import SigFigures
-from repositories.FileManager import FileManager
+from utils.repositories.SigFigures import SigFigures
+from utils.repositories.FileManager import FileManager
 
 
 def validateFigures(figuresManager: SigFigures, value: str, fileManager: FileManager) -> str:

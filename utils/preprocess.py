@@ -1,18 +1,18 @@
-from proccess.files import selectFiles, createResultFile, selectFormulas, createFormulasResultFile, getFilesContent
-from proccess.numbers import getNumbers, setSystems, generateResultsFromFormulas, setOperations
-from proccess.matrixConverter import convert
-from proccess.figures import getSigFigs
-from repositories.NumericSystem import NumericSystem
-from repositories.SigFigures import SigFigures
-from repositories.FileManager import FileManager
-from helpers.formulas import checkIsMatrix, getFormulas
-from repositories.ElementalOperations import ElementalOperations
-from repositories.MatrixOperations import MatrixOperations
-from validations.gaussValidations import validateJordan, validateSeidel, instanceValidationJordan, instanceValidationSeidel
+from utils.proccess.files import selectFiles, createResultFile, selectFormulas, createFormulasResultFile, getFilesContent
+from utils.proccess.numbers import getNumbers, setSystems, generateResultsFromFormulas, setOperations
+from utils.proccess.matrixConverter import convert
+from utils.proccess.figures import getSigFigs
+from utils.repositories.NumericSystem import NumericSystem
+from utils.repositories.SigFigures import SigFigures
+from utils.repositories.FileManager import FileManager
+from utils.helpers.formulas import checkIsMatrix, getFormulas
+from utils.repositories.ElementalOperations import ElementalOperations
+from utils.repositories.MatrixOperations import MatrixOperations
+from utils.validations.gaussValidations import validateJordan, validateSeidel, instanceValidationJordan, instanceValidationSeidel
 
 
 def preProcess() -> None:
-    path = "./src/storage/sources/"
+    path = "./utils/storage/sources/"
     fileManager = FileManager(path)
 
     aux = matrices = convert(fileManager)
@@ -53,7 +53,7 @@ def preProcess() -> None:
     setOperations(numbers, operationManager)
 
     fileManager.setRouter(
-        "./src/storage/results/")
+        "./utils/storage/results/")
     createResultFile(fileManager, numbers, matrices,
                      matrixManager, resultJordan, resultSeidel)
 
@@ -72,7 +72,7 @@ def preProcess() -> None:
 
     generateResultsFromFormulas(formulas, numbers, matrices, fileManager, isMatrix)
 
-    fileManager.setRouter("./src/storage/results/")
+    fileManager.setRouter("./utils/storage/results/")
     createFormulasResultFile(fileManager, formulas, formulasEntries)
 
     print("-- PROGRAMA TERMINADO --")

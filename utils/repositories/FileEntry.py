@@ -1,5 +1,5 @@
 import numpy as np
-from helpers.arrays import appendArray
+from utils.helpers.arrays import appendArray
 from typing import TextIO
 from array import ArrayType
 

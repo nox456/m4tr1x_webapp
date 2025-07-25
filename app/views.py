@@ -4,7 +4,7 @@ from django.shortcuts import render
 import matplotlib.pyplot as plt
 from django.http import HttpResponse
 from io import BytesIO
-from utils import preprocess
+from utils.preprocess import preProcess
 import numpy as np
 
 count = 0
@@ -15,7 +15,7 @@ def index(_):
         # Max iterations reached
         return HttpResponse(b"STOP!!")
     count += 1
-    preprocess.preProcess()
+    preProcess()
     grafica3D(_)
     return render(_, 'home/index.html')
 

@@ -1,4 +1,4 @@
-from repositories.ElementalOperations import ElementalOperations
+from utils.repositories.ElementalOperations import ElementalOperations
 from array import ArrayType
 
 

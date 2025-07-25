@@ -1,5 +1,5 @@
-from repositories.FileManager import FileManager
-from proccess.errors import createLogFile
+from utils.repositories.FileManager import FileManager
+from utils.proccess.errors import createLogFile
 
 
 def validateSelector(min: int, max: int, text: str, fileManager: FileManager) -> int:

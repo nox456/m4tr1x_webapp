@@ -1,12 +1,12 @@
 import numpy as np
-from proccess.files import selectFiles, getFilesContent
-from proccess.numbers import getNumbers, setSystems
-from repositories.NumericSystem import NumericSystem
+from utils.proccess.files import selectFiles, getFilesContent
+from utils.proccess.numbers import getNumbers, setSystems
+from utils.repositories.NumericSystem import NumericSystem
 from array import ArrayType
 
 
 def convert(manager):
-    manager.setRouter("./src/storage/sources/")
+    manager.setRouter("./utils/storage/sources/")
     files = selectFiles(manager)
     if files is None:
         return

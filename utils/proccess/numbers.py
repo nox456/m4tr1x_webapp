@@ -1,15 +1,15 @@
-from helpers.arrays import appendArray
-from validations.files import validateFileLine, validateFileElement
-from validations.systems import validatePossibleSystems
+from utils.helpers.arrays import appendArray
+from utils.validations.files import validateFileLine, validateFileElement
+from utils.validations.systems import validatePossibleSystems
 import numpy as np
-from repositories.FileManager import FileManager
-from repositories.NumericSystem import NumericSystem
-from repositories.Number import Number
-from repositories.Formula import Formula
-from repositories.ElementalOperations import ElementalOperations
+from utils.repositories.FileManager import FileManager
+from utils.repositories.NumericSystem import NumericSystem
+from utils.repositories.Number import Number
+from utils.repositories.Formula import Formula
+from utils.repositories.ElementalOperations import ElementalOperations
 from array import ArrayType
 import math
-from validations.operations import validateOperations
+from utils.validations.operations import validateOperations
 
 
 def getNumbers(fileContent: ArrayType[ArrayType[str]], manager: FileManager, inMatrix: bool = False) -> ArrayType[ArrayType[Number]]:

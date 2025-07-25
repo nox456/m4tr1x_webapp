@@ -1,10 +1,10 @@
-from helpers.arrays import containsArray
-from repositories.Number import Number
-from repositories.FileEntry import FileEntry
-from repositories.FileManager import FileManager
+from utils.helpers.arrays import containsArray
+from utils.repositories.Number import Number
+from utils.repositories.FileEntry import FileEntry
+from utils.repositories.FileManager import FileManager
 from array import ArrayType
 from typing import TextIO
-from repositories.Formula import Formula
+from utils.repositories.Formula import Formula
 
 
 def validateFileLine(line: ArrayType[str], manager: FileManager) -> ArrayType[str]:

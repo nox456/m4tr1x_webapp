@@ -1,6 +1,6 @@
 import numpy as np
-from helpers.arrays import appendArray
-from validations.operations import validateGaussOperation
+from utils.helpers.arrays import appendArray
+from utils.validations.operations import validateGaussOperation
 
 
 class GaussMatrixOp:

@@ -1,15 +1,15 @@
-from validations.files import validateSourceFileName, validateFileEntry
+from utils.validations.files import validateSourceFileName, validateFileEntry
 import numpy as np
 import random
-from repositories.FileManager import FileManager
-from repositories.FileEntry import FileEntry
+from utils.repositories.FileManager import FileManager
+from utils.repositories.FileEntry import FileEntry
 from array import ArrayType
-from repositories.Number import Number
-from repositories.Formula import Formula
-from helpers.arrays import appendArray
+from utils.repositories.Number import Number
+from utils.repositories.Formula import Formula
+from utils.helpers.arrays import appendArray
 from datetime import datetime
-from repositories.MatrixOperations import MatrixOperations
-from validations.operations import validateMatrixOperation
+from utils.repositories.MatrixOperations import MatrixOperations
+from utils.validations.operations import validateMatrixOperation
 
 
 def selectFiles(manager: FileManager) -> ArrayType[FileEntry]:

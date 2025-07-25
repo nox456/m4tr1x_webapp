@@ -2,7 +2,7 @@ from datetime import datetime
 from random import randint
 import traceback
 from typing import Any
-from repositories.FileManager import FileManager
+from utils.repositories.FileManager import FileManager
 
 
 def createLogFile(manager: FileManager, error: Exception, trace: type(Exception.__traceback__), value: Any) -> None:

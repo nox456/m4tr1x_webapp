@@ -1,11 +1,11 @@
 from array import ArrayType
 import numpy as np
-from helpers.arrays import appendArray
-from validations.selector import validateSelector
-from validations.files import validateFormula
-from repositories.FileManager import FileManager
-from repositories.Formula import Formula
-from repositories.Number import Number
+from utils.helpers.arrays import appendArray
+from utils.validations.selector import validateSelector
+from utils.validations.files import validateFormula
+from utils.repositories.FileManager import FileManager
+from utils.repositories.Formula import Formula
+from utils.repositories.Number import Number
 import math
 
 
