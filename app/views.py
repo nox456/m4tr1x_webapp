@@ -22,8 +22,6 @@ def index(_):
     eqGenerator("eqArchive","./utils/storage/formulas/")
     preProcess()
     vectores = proccessmatrix()
-    print("matriz")
-    print(vectores)
     grafica3D(_, vectores[:][0], vectores[:][1], vectores[:][2])
     return render(_, 'home/index.html')
 
@@ -31,17 +29,7 @@ def grafica3D(request, x, y, z):
     fig = plt.figure(figsize=(10,10))
     graph = fig.add_subplot(111, projection='3d')
 
-    print("Antes")
-    print(x)
-    print(y)
-    print(z)
-
     x, y, z = chechvectors(x, y, z)
-    
-    print("ventores")
-    print(x)
-    print(y)
-    print(z)
 
     x = np.append(x, x[0])
     y = np.append(y, y[0])
