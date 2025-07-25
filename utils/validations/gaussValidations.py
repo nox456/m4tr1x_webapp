@@ -6,7 +6,7 @@ def validateJordan(matrix, manager):
     try:
         return matrix.startOperation()
     except Exception as error:
-        from proccess.errors import createLogFile
+        from utils.proccess.errors import createLogFile
         print(error)
         createLogFile(manager, error, error.__traceback__, matrix.getMatrix())
 
@@ -15,7 +15,7 @@ def validateSeidel(matrix, manager):
     try:
         return matrix.startOperation()
     except Exception as error:
-        from proccess.errors import createLogFile
+        from utils.proccess.errors import createLogFile
         print(error)
         createLogFile(manager, error, error.__traceback__, matrix.getMatrix())
 
@@ -25,7 +25,7 @@ def instanceValidationJordan(matrices, manager):
         matricesGauss = GaussMatrixOp(matrices)
         return matricesGauss
     except Exception as error:
-        from proccess.errors import createLogFile
+        from utils.proccess.errors import createLogFile
         print(error)
         createLogFile(manager, error, error.__traceback__, matrices)
 
@@ -35,6 +35,6 @@ def instanceValidationSeidel(matrices, manager):
         matricesGauss = SeidelMatrixOp(matrices)
         return matricesGauss
     except Exception as error:
-        from proccess.errors import createLogFile
+        from utils.proccess.errors import createLogFile
         print(error)
         createLogFile(manager, error, error.__traceback__, matrices)

@@ -55,9 +55,10 @@ def preProcess() -> None:
     fileManager.setRouter(
         "./utils/storage/results/")
     createResultFile(fileManager, numbers, matrices,
-                     matrixManager, resultJordan, resultSeidel)
+                    matrixManager, resultJordan, resultSeidel)
 
-    isMatrix = checkIsMatrix(fileManager)
+    #isMatrix = checkIsMatrix(fileManager)
+    isMatrix = True
 
     formulasEntries = selectFormulas(fileManager, isMatrix)
 
@@ -68,7 +69,7 @@ def preProcess() -> None:
     formulaContent = getFilesContent(formulasEntries)
 
     formulas = getFormulas(formulaContent, fileManager, isMatrix,
-                           matrices if isMatrix else numbers)
+                        matrices if isMatrix else numbers)
 
     generateResultsFromFormulas(formulas, numbers, matrices, fileManager, isMatrix)
 

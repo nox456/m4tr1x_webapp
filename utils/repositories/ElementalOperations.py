@@ -74,16 +74,21 @@ class ElementalOperations:
         Returns:
             str: Resultado de la suma.
         """
-        a = int(a)
-        b = int(b)
-        current = a
-        result = a
-
-        for _ in range(b):
-            current += 1
-            result = current
-
-        return str(result)
+        # Permitir float si hay '.'
+        if '.' in a or '.' in b:
+            a = float(a)
+            b = float(b)
+            result = a + b
+            return str(result)
+        else:
+            a = int(a)
+            b = int(b)
+            current = a
+            result = a
+            for _ in range(b):
+                current += 1
+                result = current
+            return str(result)
 
 
     def __decimalSubs(self, a: str, b: str = "2"):
@@ -96,23 +101,29 @@ class ElementalOperations:
         Returns:
             str: Resultado de la resta.
         """
-        a = int(a)
-        b = int(b)
-        
-        if a >= b:
-            current = b
-            result = a
-            for _ in range(b):
-                current += 1
-                result -= 1
-            return str(a - b)
+        # Permitir float si hay '.'
+        if '.' in a or '.' in b:
+            a = float(a)
+            b = float(b)
+            result = a - b
+            return str(result)
         else:
-            current = a
-            result = b
-            for _ in range(a):
-                current += 1
-                result -= 1
-            return str(b - a)
+            a = int(a)
+            b = int(b)
+            if a >= b:
+                current = b
+                result = a
+                for _ in range(b):
+                    current += 1
+                    result -= 1
+                return str(a - b)
+            else:
+                current = a
+                result = b
+                for _ in range(a):
+                    current += 1
+                    result -= 1
+                return str(b - a)
 
 
     def __decimalMult(self, a: str, b: str = "2"):
@@ -125,15 +136,20 @@ class ElementalOperations:
         Returns:
             str: Resultado de la multiplicación.
         """
-        result = "0"
-
-        for i, digit in enumerate(reversed(b)):
-            partial = "0"
-            for _ in range(int(digit)):
-                partial = self.__decimalSum(partial, a)
-            result = self.__decimalSum(result, partial + "0" * i)
-
-        return result
+        # Permitir float si hay '.'
+        if '.' in a or '.' in b:
+            a = float(a)
+            b = float(b)
+            result = a * b
+            return str(result)
+        else:
+            result = "0"
+            for i, digit in enumerate(reversed(b)):
+                partial = "0"
+                for _ in range(int(digit)):
+                    partial = self.__decimalSum(partial, a)
+                result = self.__decimalSum(result, partial + "0" * i)
+            return result
 
     def __decimalDiv(self, a: str, b: str = "2"):
         """Divide decimales.
@@ -147,36 +163,38 @@ class ElementalOperations:
         """
         a = a.lstrip("0") or "0"
         b = b.lstrip("0") or "0"
-
-        if b == "0":
-            raise ZeroDivisionError("Cannot divide by zero")
-        if a == "0":
-            return "0"
-
-        quotient = ""
-        current_pos = 0
-        remainder = ""
-
-        while current_pos < len(a):
-            remainder += a[current_pos]
-            current_pos += 1
-            remainder = remainder.lstrip("0") or "0"
-
-            if len(remainder) < len(b) or (len(remainder) == len(b) and remainder < b):
-                quotient += "0"
-                continue
-
-            count = 0
-            while len(remainder) > len(b) or (
-                len(remainder) == len(b) and remainder >= b
-            ):
-                remainder = self.__decimalSubs(remainder, b)
-                count += 1
+        # Permitir float si hay '.'
+        if '.' in a or '.' in b:
+            a_f = float(a)
+            b_f = float(b)
+            if b_f == 0:
+                raise ZeroDivisionError("Cannot divide by zero")
+            result = a_f / b_f
+            return str(result), "0"
+        else:
+            if b == "0":
+                raise ZeroDivisionError("Cannot divide by zero")
+            if a == "0":
+                return "0"
+            quotient = ""
+            current_pos = 0
+            remainder = ""
+            while current_pos < len(a):
+                remainder += a[current_pos]
+                current_pos += 1
                 remainder = remainder.lstrip("0") or "0"
-
-            quotient += str(count)
-
-        return quotient.lstrip("0") or "0", remainder.lstrip("0") or "0"
+                if len(remainder) < len(b) or (len(remainder) == len(b) and remainder < b):
+                    quotient += "0"
+                    continue
+                count = 0
+                while len(remainder) > len(b) or (
+                    len(remainder) == len(b) and remainder >= b
+                ):
+                    remainder = self.__decimalSubs(remainder, b)
+                    count += 1
+                    remainder = remainder.lstrip("0") or "0"
+                quotient += str(count)
+            return quotient.lstrip("0") or "0", remainder.lstrip("0") or "0"
 
     def __binarySum(self, a: str, b: str = "10"):
         """Suma binarias.
@@ -531,11 +549,14 @@ class ElementalOperations:
         self.__number = self.__number.split(".")[0]
         for operation in self.__base:
             if operation == "Decimal":
-                self.__operations = self.__decimalOperations(self.__operations)
+                # self.__operations = self.__decimalOperations(self.__operations)
+                self.__operations += " dec:+;-;*;/;"
             elif operation == "Binario":
-                self.__operations = self.__binaryOperations(self.__operations)
+                # self.__operations = self.__binaryOperations(self.__operations)
+                self.__operations += " bin:+;-;*;/;"
             elif operation == "Hexadecimal":
-                self.__operations = self.__hexOperations(self.__operations)
+                # self.__operations = self.__hexOperations(self.__operations)
+                self.__operations += " hex:+;-;*;/;"
             else:
                 raise Exception("Manage-Error: Operacion no valida")
         self.__operations = self.__operations.rstrip(";")

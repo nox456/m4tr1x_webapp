@@ -8,6 +8,6 @@ def validatePossibleSystems(systemManager: NumericSystem, value: str, fileManage
         systemManager.setNumber(value)
         return systemManager.getPossibleSystems()
     except Exception as error:
-        from proccess.errors import createLogFile
+        from utils.proccess.errors import createLogFile
         createLogFile(fileManager, error, error.__traceback__, value)
         return None

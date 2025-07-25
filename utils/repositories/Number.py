@@ -19,6 +19,8 @@ class Number:
     __ops = ""
 
     def __init__(self, value: str, validate: bool = True):
+        # Convertir ',' a '.' antes de procesar
+        value = value.replace(',', '.')
         self.__value = self.__utilValue(value) if validate else value
         self.__systems = np.array([])
         self.__sigFigs = 0
@@ -99,26 +101,25 @@ class Number:
         Raises:
             Exception: Si el valor ingresado no es válido.
         """
-        chars_allowed = "0123456789ABCDEF.,"
+        chars_allowed = "0123456789ABCDEF."
         for char in value:
             if char.upper() not in chars_allowed:
                 raise Exception(
                     f"Manage-Error: El numero {value} ingresado no es valido")
-        if value.startswith((".", ",")) or value.endswith((".", ",")):
+        if value.startswith(".") or value.endswith("."):
             raise Exception(
                 f"Manage-Error: El numero {value} ingresado no es valido")
-        separatorCount = value.count(".") + value.count(",")
-        if separatorCount > 1:
+        if value.count(".") > 1:
             raise Exception(
                 f"Manage-Error: El numero {value} ingresado no es valido")
         self.__isValid = True
         return value
 
-    def toDecimal(self) -> int:
+    def toDecimal(self):
         """Convierte el número a base decimal.
 
         Returns:
-            int: Número en decimal.
+            int | float | None: Número en decimal.
         """
         if self.__value is None:
             return None
@@ -142,7 +143,10 @@ class Number:
             "f": "15"
         }
         if "Decimal" in self.__systems:
-            value = int(self.__value)
+            if "." in self.__value:
+                value = float(self.__value)
+            else:
+                value = int(self.__value)
         elif "Hexadecimal" in self.__systems and "Binario" not in self.__systems:
             for i in range(len(str(self.__value))):
                 exponent = len(str(self.__value)) - i - 1

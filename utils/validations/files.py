@@ -15,7 +15,7 @@ def validateFileLine(line: ArrayType[str], manager: FileManager) -> ArrayType[st
             raise Exception(
                 "El formato de la linea es incorrecto")
     except Exception as error:
-        from proccess.errors import createLogFile
+        from utils.proccess.errors import createLogFile
         createLogFile(manager, error, error.__traceback__, line)
         return None
 
@@ -25,7 +25,7 @@ def validateFileEntry(name: str, rawContent: TextIO,  manager: FileManager) -> F
         file = FileEntry(name, rawContent, manager.getPath())
         return file
     except Exception as error:
-        from proccess.errors import createLogFile
+        from utils.proccess.errors import createLogFile
         createLogFile(manager, error, error.__traceback__, name)
         return None
 
@@ -34,7 +34,7 @@ def validateFileElement(element: str, manager: FileManager) -> Number:
     try:
         number = Number(element)
     except Exception as error:
-        from proccess.errors import createLogFile
+        from utils.proccess.errors import createLogFile
         createLogFile(manager, error, error.__traceback__, element)
         return Number(element, False)
     return number
@@ -50,7 +50,7 @@ def validateSourceFileName(name: str, manager: FileManager) -> str:
         else:
             raise Exception("El nombre del archivo fuente es incorrecto")
     except Exception as error:
-        from proccess.errors import createLogFile
+        from utils.proccess.errors import createLogFile
         createLogFile(manager, error, error.__traceback__, name)
         return None
 
@@ -61,6 +61,6 @@ def validateFormula(content: str, manager: FileManager, isMatrix: bool) -> bool:
         return formula
     except Exception as error:
         print(error)
-        from proccess.errors import createLogFile
+        from utils.proccess.errors import createLogFile
         createLogFile(manager, error, error.__traceback__, content)
         return Formula(content, isMatrix, False)

@@ -74,7 +74,7 @@ def createResultMatrixFile(manager: FileManager, fileName: str,  matrices, matri
 
 
 def selectFormulas(manager: FileManager, isMatrix: bool) -> ArrayType[FileEntry]:
-    manager.setRouter("./src/storage/formulas/")
+    manager.setRouter("./utils/storage/formulas/")
     formulasFiles = manager.listFiles()
     if len(formulasFiles) == 0:
         print("No hay formularios disponibles")

@@ -75,16 +75,12 @@ class NumericSystem:
             ArrayType[str]: Sistemas posibles del número.
         """
         if "." in self.__number or "," in self.__number:
-            separator = "." if "." in self.__number else ","
-            possibleBases = np.array([None, None])
-            sides = np.array(self.__number.split(separator))
-            for i in range(len(sides)):
-                isDecimal = self.__isDecimal(sides[i])
-                isHex = self.__isHex(sides[i])
-                isBinary = self.__isBinary(sides[i])
-                bases = np.array([isDecimal, isHex, isBinary])
-                possibleBases[i] = bases[bases != ""]
-            return np.intersect1d(possibleBases[0], possibleBases[1])
+            num = self.__number.replace(".","").replace(",","")
+            if num == "":
+                return np.array([])
+            isDecimal = self.__isDecimal(num)
+            bases = np.array([isDecimal])
+            return bases[bases != ""]
         else:
             isDecimal = self.__isDecimal(self.__number)
             isHex = self.__isHex(self.__number)
