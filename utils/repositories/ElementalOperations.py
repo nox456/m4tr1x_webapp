@@ -577,7 +577,7 @@ class ElementalOperations:
         Raises:
             Exception: Si el número no es válido.
         """
-        chars_allowed = "0123456789ABCDEF.,"
+        chars_allowed = "-0123456789ABCDEF.,"
         for char in number:
             if char.upper() not in chars_allowed:
                 raise Exception("Manage-Error: El numero ingresado no es valido")

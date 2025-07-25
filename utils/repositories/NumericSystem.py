@@ -32,7 +32,7 @@ class NumericSystem:
         Returns:
             str: Si el número es decimal.
         """
-        decimal_chars = "0123456789"
+        decimal_chars = "-0123456789"
         for char in number:
             if char not in decimal_chars:
                 return ""
@@ -47,7 +47,7 @@ class NumericSystem:
         Returns:
             str: Si el número es hexadecimal.
         """
-        hex_chars = "0123456789ABCDEF"
+        hex_chars = "-0123456789ABCDEF"
         for char in number:
             if char.upper() not in hex_chars:
                 return ""
@@ -62,7 +62,7 @@ class NumericSystem:
         Returns:
             str: Si el número es binario.
         """
-        binary_chars = "01"
+        binary_chars = "-01"
         for char in number:
             if char not in binary_chars:
                 return ""
@@ -100,7 +100,7 @@ class NumericSystem:
         Raises:
             Exception: Si el número ingresado no es valido.
         """
-        chars_allowed = "0123456789ABCDEF.,"
+        chars_allowed = "-0123456789ABCDEF.,"
         for char in number:
             if char.upper() not in chars_allowed:
                 raise Exception(

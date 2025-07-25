@@ -71,12 +71,10 @@ def preProcess() -> None:
     formulas = getFormulas(formulaContent, fileManager, isMatrix,
                         matrices if isMatrix else numbers)
 
-    generateResultsFromFormulas(formulas, numbers, matrices, fileManager, isMatrix)
+    result = generateResultsFromFormulas(formulas, numbers, matrices, fileManager, isMatrix)
 
     fileManager.setRouter("./utils/storage/results/")
     createFormulasResultFile(fileManager, formulas, formulasEntries)
     
 
     print("-- PROGRAMA TERMINADO --")
-
-    return resultJordan

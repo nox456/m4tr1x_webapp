@@ -1,5 +1,6 @@
 import os
 import random
+from datetime import datetime
 
 class archiveGenerator:
     __router = ""
@@ -20,8 +21,9 @@ class archiveGenerator:
             raise Exception("Manage-Error: La ruta es vacia.")
 
         self.__utilDirectory(router)
+        fecha = datetime.now().strftime("%d-%m-%Y")
         for i in range(3):
-            self.__nameArchive = nameArchive+str(i)+".bin"
+            self.__nameArchive = nameArchive+"_"+fecha+"_serial"+str(i)+".bin"
             self.archiveDataGenerator()
 
     def setRouter(self, router):
@@ -53,7 +55,6 @@ class archiveGenerator:
             raise Exception("Manage-Error: El nombre esta Vacio.")
 
         try: 
-            print(self.cantElements())
             if self.cantReg() >= 3 and self.cantElements() >3:
                 os.remove(self.__router + nameArchive)
                 archive = open(self.__router + nameArchive, "w")
@@ -90,7 +91,7 @@ class archiveGenerator:
                     if j == (len(arrayBi[0]) - 1):
                         self.__setOrCreateFiles(self.__nameArchive, str(arrayBi[i][j]), i < (len(arrayBi) - 1),)
                     else:
-                        self.__setOrCreateFiles(self.__nameArchive, str(arrayBi[i][j]) + "/")
+                        self.__setOrCreateFiles(self.__nameArchive, str(arrayBi[i][j]) + "#")
 
     def __utilDirectory(self, router):
 
@@ -125,10 +126,9 @@ class archiveGenerator:
                 if not lines:
                     return 0
                 ultimo_registro = lines[-1].strip()
-                print(ultimo_registro)
                 if not ultimo_registro:
                     return 0
-                return len(ultimo_registro.split('/'))
+                return len(ultimo_registro.split('#'))
         except FileNotFoundError as e:
             print("Manage-Error: El archivo no ha sido encontrado", e)
             return 0

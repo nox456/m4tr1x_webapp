@@ -82,7 +82,7 @@ class Formula:
         letter = alpha[self.parseFormula(self.__raw, results) - 1]
         self.__result = results[letter]
 
-    def evaluateMatrixFormula(self, matrices: ArrayType[ArrayType[ArrayType[int]]], manager: FileManager) -> None:
+    def evaluateMatrixFormula(self, matrices: ArrayType[ArrayType[ArrayType[int]]], manager: FileManager):
         """Reemplaza las variables de la fórmula con las matrices.
 
         Args:
@@ -96,9 +96,10 @@ class Formula:
             self.__values = {"A": firstMatrix, "B": secondMatrix, "C": thirdMatrix}
             letter = alpha[self.parseFormula(self.__raw, results) - 1]
             self.__result = self.__formatMatrix(results[letter])
+            return self.__result
         except Exception as error:
             print(error)
-            from proccess.errors import createLogFile
+            from utils.proccess.errors import createLogFile
             createLogFile(manager, error, error.__traceback__, results)
             return None
 

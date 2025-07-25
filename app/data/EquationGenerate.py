@@ -1,5 +1,6 @@
 import os
 import random
+from datetime import datetime
 
 class eqGenerator:
 
@@ -7,7 +8,7 @@ class eqGenerator:
     __nameArchive = ""
 
     def __init__(
-        self, nameArchive="eqArchive.bin", router=os.getcwd()):
+        self, nameArchive="eqArchive", router=os.getcwd()):
         """
         Crear o modificar archivos.
 
@@ -21,9 +22,11 @@ class eqGenerator:
         if len(nameArchive) == 0 or not nameArchive:
             raise Exception("Manage-Error: La ruta es vacia.")
 
-        self.__nameArchive = nameArchive
         self.__utilDirectory(router)
-        self.saveFormulas()
+        fecha = datetime.now().strftime("%d-%m-%Y")
+        for i in range(3):
+            self.__nameArchive = nameArchive+"_"+fecha+"_serial"+str(i)+".bin"
+            self.saveFormulas()
 
     def __generateRandomOperator(self):
         return random.choice(['+', '-', '*', '/'])
@@ -48,12 +51,12 @@ class eqGenerator:
         
         formulaParts.append(elements[-1])
         
-        formula = ' '.join(formulaParts)
+        formula = ''.join(formulaParts)
         
-        if random.choice([True, False]):
-            openPos = random.randint(0, len(formulaParts)//2)
-            closePos = random.randint(openPos+1, len(formulaParts)-1)
-            formula = (formula[:openPos*2] + '(' + formula[openPos*2:closePos*2] + ')' + formula[closePos*2:])
+        #if random.choice([True, False]):
+        #    openPos = random.randint(0, len(formulaParts)//2)
+        #    closePos = random.randint(openPos+1, len(formulaParts)-1)
+        #    formula = (formula[:openPos*2] + '(' + formula[openPos*2:closePos*2+1] + ')' + formula[closePos*2:])
         
         return formula
 
@@ -62,7 +65,6 @@ class eqGenerator:
             with open(os.path.join(self.__router, self.__nameArchive), 'w') as file:
                 formula = self.__generateFormula()
                 file.write(formula + '\n')
-            print(f"Se generaro la fórmula en {self.__nameArchive}")
         except Exception as e:
             print(f"Error al generar fórmulas: {e}")
 

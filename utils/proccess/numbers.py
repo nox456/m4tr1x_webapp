@@ -35,11 +35,13 @@ def getNumbers(fileContent: ArrayType[ArrayType[str]], manager: FileManager, inM
 
 
 def generateResultsFromFormulas(formulas: ArrayType[ArrayType[Formula]], numbers: ArrayType[ArrayType[Number]], matrices: ArrayType[ArrayType[ArrayType[int]]], manager: FileManager, isMatrix: bool) -> None:
+    result = np.array([])
     if isMatrix:
         for i in range(len(formulas)):
             for j in range(len(formulas[i])):
                 for matrix in matrices:
-                    formulas[i][j].evaluateMatrixFormula(matrices, manager)
+                   result = np.append(result, formulas[i][j].evaluateMatrixFormula(matrices, manager))
+        return result
     else:
         for i in range(len(formulas)):
             j = 0

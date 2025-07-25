@@ -78,7 +78,7 @@ class SigFigures:
         cont = 0
         cantDots = 0
         for digit in num:
-            if (digit != "0" and digit != "." and digit != ","):
+            if (digit != "0" and digit != "." and digit != "," and digit != "-"):
                 self.__isZero = False
             if (not self.__isZero):
                 cont += 1

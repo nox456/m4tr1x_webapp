@@ -101,7 +101,7 @@ class Number:
         Raises:
             Exception: Si el valor ingresado no es válido.
         """
-        chars_allowed = "0123456789ABCDEF."
+        chars_allowed = "-0123456789ABCDEF."
         for char in value:
             if char.upper() not in chars_allowed:
                 raise Exception(
