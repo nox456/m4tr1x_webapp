@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 from django.http import HttpResponse
 from io import BytesIO
 from utils.preprocess import preProcess
+from app.data.DataGenerate import archiveGenerator
+from app.data.EquationGenerate import eqGenerator
 import numpy as np
 
 count = 0
@@ -15,7 +17,9 @@ def index(_):
         # Max iterations reached
         return HttpResponse(b"STOP!!")
     count += 1
-    preProcess()
+    archiveGenerator("generalArchive","./utils/storage/sources/")
+    eqGenerator("eqArchive.bin","./utils/storage/formulas/")
+    vector = preProcess()
     grafica3D(_)
     return render(_, 'home/index.html')
 

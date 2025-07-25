@@ -75,6 +75,8 @@ def preProcess() -> None:
 
     fileManager.setRouter("./utils/storage/results/")
     createFormulasResultFile(fileManager, formulas, formulasEntries)
+    
 
     print("-- PROGRAMA TERMINADO --")
 
+    return resultJordan

@@ -5,7 +5,7 @@ class archiveGenerator:
     __router = ""
     __nameArchive = ""
 
-    def __init__(self, nameArchive="generalArchive.bin", router=os.getcwd()):
+    def __init__(self, nameArchive="generalArchive", router=os.getcwd()):
         """
         Crear o modificar archivos.
 
@@ -19,8 +19,10 @@ class archiveGenerator:
         if len(nameArchive) == 0 or not nameArchive:
             raise Exception("Manage-Error: La ruta es vacia.")
 
-        self.__nameArchive = nameArchive
         self.__utilDirectory(router)
+        for i in range(3):
+            self.__nameArchive = nameArchive+str(i)+".bin"
+            self.archiveDataGenerator()
 
     def setRouter(self, router):
         """
@@ -51,9 +53,14 @@ class archiveGenerator:
             raise Exception("Manage-Error: El nombre esta Vacio.")
 
         try: 
-            if not content or len(content) == 0:
-                archive = open(self.__router + "\\" + nameArchive + ".txt", "x")
-                return
+            print(self.cantElements())
+            if self.cantReg() >= 3 and self.cantElements() >3:
+                os.remove(self.__router + nameArchive)
+                archive = open(self.__router + nameArchive, "w")
+                if bool == True:
+                    archive.write(content + "\n")
+                else:
+                    archive.write(content)
             archive = open(os.path.join(self.__router,nameArchive), "a") 
 
             if bool == True:
@@ -97,9 +104,31 @@ class archiveGenerator:
             )
         self.__router = router
 
+    def cantReg(self):
+        if not self.__nameArchive or len(self.__nameArchive) == 0:
+            raise Exception("Manage-Error: El nombre esta Vacio.")
 
-try:
-    archive = archiveGenerator()
-    archive.archiveDataGenerator()
-except Exception as e:
-    print(e)
+        try:
+            with open(os.path.join(self.__router, self.__nameArchive), 'r') as file:
+                return len(file.readlines())
+        except FileNotFoundError as e:
+            print("Manage-Error: El archivo no ha sido encontrado", e)
+            return 0
+
+    def cantElements(self):
+        if not self.__nameArchive or len(self.__nameArchive) == 0:
+            raise Exception("Manage-Error: El nombre esta Vacio.")
+
+        try:
+            with open(os.path.join(self.__router, self.__nameArchive), 'r') as file:
+                lines = file.readlines()
+                if not lines:
+                    return 0
+                ultimo_registro = lines[-1].strip()
+                print(ultimo_registro)
+                if not ultimo_registro:
+                    return 0
+                return len(ultimo_registro.split('/'))
+        except FileNotFoundError as e:
+            print("Manage-Error: El archivo no ha sido encontrado", e)
+            return 0
