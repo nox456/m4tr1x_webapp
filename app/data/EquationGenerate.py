@@ -23,50 +23,48 @@ class eqGenerator:
 
         self.__nameArchive = nameArchive
         self.__utilDirectory(router)
+        self.saveFormulas()
 
-    def setRouter(self, router):
-        """
-        Cambio de ruta existente
+    def __generateRandomOperator(self):
+        return random.choice(['+', '-', '*', '/'])
+    
+    def __generateRandomMember(self):
+        num = random.randint(1, 3)
+        if num == 1:
+            return "A"
+        elif num == 2:
+            return "B"
+        else:
+            return "C"
+    
+    def __generateFormula(self):
+        elements = [self.__generateRandomMember() for _ in range(3)]
+        operators = [self.__generateRandomOperator() for _ in range(random.randint(3, 5))]
+        
+        formulaParts = []
+        for i in range(len(operators)):
+            formulaParts.append(elements[i % len(elements)])
+            formulaParts.append(operators[i])
+        
+        formulaParts.append(elements[-1])
+        
+        formula = ' '.join(formulaParts)
+        
+        if random.choice([True, False]):
+            openPos = random.randint(0, len(formulaParts)//2)
+            closePos = random.randint(openPos+1, len(formulaParts)-1)
+            formula = (formula[:openPos*2] + '(' + formula[openPos*2:closePos*2] + ')' + formula[closePos*2:])
+        
+        return formula
 
-        ->@param: string router = C:\\folder1\\folder2\\folder or "C:\folder\folder\folder" or C:/folder/folder/folder
-        ->@return: Void
-        """
-        if not router or len(router) == 0:
-            raise Exception("Manage-Error: La ruta es vacia.")
-        self.__utilDirectory(router)
-
-    def setName(self, nameArchive):
-        """
-        Cambio de ruta existente
-
-        ->@param: string [archive.extension]
-        ->@return: Void
-        """
-        if not nameArchive or len(nameArchive) == 0:
-            raise Exception("Manage-Error: La ruta es vacia.")
-
-        self.__nameArchive
-
-    def __setOrCreateFiles(self, nameArchive, content="", bool=False):
-
-        if not nameArchive or len(nameArchive) == 0:
-            raise Exception("Manage-Error: El nombre esta Vacio.")
-
+    def saveFormulas(self):
         try:
-            if not content or len(content) == 0:
-                archive = open(self.__router + "\\" + nameArchive + ".txt", "x")
-                return
-            archive = open(os.path.join(self.__router,nameArchive), "a")
-
-            if bool == True:
-                archive.write(content + "\n")
-            else:
-                archive.write(content)
-
-        except FileNotFoundError as e:
-            print("Manage-Error: El archivo no ha sido encontrado", e)
-
-
+            with open(os.path.join(self.__router, self.__nameArchive), 'w') as file:
+                formula = self.__generateFormula()
+                file.write(formula + '\n')
+            print(f"Se generaro la fórmula en {self.__nameArchive}")
+        except Exception as e:
+            print(f"Error al generar fórmulas: {e}")
 
     def __utilDirectory(self, router):
 
