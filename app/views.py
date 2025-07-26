@@ -22,8 +22,11 @@ def index(_):
     eqGenerator("eqArchive","./utils/storage/formulas/")
     preProcess()
     vectores = proccessmatrix()
+    print("jojo")
+    print(vectores)
     grafica3D(_, vectores[:][0], vectores[:][1], vectores[:][2])
-    return render(_, 'home/index.html')
+    distancias = distPoints(vectores[:][0], vectores[:][1], vectores[:][2])
+    return render(_,'home/index.html',{'distancias': distancias,})
 
 def grafica3D(request, x, y, z):
     fig = plt.figure(figsize=(10,10))
@@ -57,14 +60,25 @@ def chechvectors(x,y,z):
 
     if isinstance(y, np.ndarray):
         if  np.isnan(y).any():
-            y = np.array([0, 0, 0])
+            y = np.array([1, 1, 1])
     else:
-        y = np.array([0, 0, 0])
+        y = np.array([1, 1, 1])
 
     if isinstance(z, np.ndarray):
         if  np.isnan(z).any():
-            z = np.array([0, 0, 0])
+            z = np.array([2, 2, 2])
     else:
-        z = np.array([0, 0, 0])
+        z = np.array([2, 2, 2])
 
     return x,y,z
+
+def distPoints(x,y,z):
+    x, y, z = chechvectors(x, y, z)
+    dist1= np.linalg.norm(x - y)
+    dist2 = np.linalg.norm(x - z)
+    dist3 = np.linalg.norm(y - z) 
+    distA = "Distancia entre A y B: " + str(dist1)
+    distB = "Distancia entre A y C: " + str(dist2)
+    distC = "Distancia entre B y C: " + str(dist3)
+    distancias = {'AB': distA,'AC': distB,'BC': distC}
+    return distancias

@@ -1,2 +1,8 @@
 {% load static %}
 <img src={% static "/graphics/graphics.png" %} alt="rgjehroigj">
+{% if distancias %}
+        <h2>Resultados:</h2>
+        <p>Distancia AB: {{ distancias.AB }}</p>
+        <p>Distancia AC: {{ distancias.AC }}</p>
+        <p>Distancia BC: {{ distancias.BC }}</p>
+    {% endif %}
