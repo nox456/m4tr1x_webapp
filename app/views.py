@@ -22,8 +22,6 @@ def index(_):
     eqGenerator("eqArchive","./utils/storage/formulas/")
     preProcess()
     vectores = proccessmatrix()
-    print("jojo")
-    print(vectores)
     grafica3D(_, vectores[:][0], vectores[:][1], vectores[:][2])
     distancias = distPoints(vectores[:][0], vectores[:][1], vectores[:][2])
     return render(_,'home/index.html',{'distancias': distancias,})

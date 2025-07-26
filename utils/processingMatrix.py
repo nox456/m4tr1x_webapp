@@ -33,8 +33,6 @@ def proccessmatrix():
         if i%4 == 0:
             matrices[n]=matrixConverter(result[i])
             n+=1
-    print("Aqui")
-    print(matrices)
 
     matrixGauss = instanceValidationJordan(matrices, fileManager)
     resultJordan = validateJordan(matrixGauss, fileManager)
